@@ -31,16 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called.
@@ -54,16 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                // // Validate returns true if the form is valid, or false otherwise.
-                // if (valueToCheck == valueToCheck.split('').reversed.join()) {
-                //   // If the form is valid, display a snackbar. In the real world,
-                //   // you'd often call a server or save the information in a database.
-                //   ScaffoldMessenger.of(context)
-                //       .showSnackBar(SnackBar(content: Text("C'est oui")));
-                // }else{
-                //   ScaffoldMessenger.of(context)
-                //       .showSnackBar(SnackBar(content: Text("C'est non")));
-                // }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShoppingLists()),
+                );
               },
               child: Text('Listes de courses'),
             ),
@@ -97,21 +81,43 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Cartes de fidélité'),
             ),
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        // onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+}
+
+
+class ShoppingLists extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Listes de courses"),
+      ),
+      body: ListView(
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios_rounded),
+            title: Text('Liste 1'),
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios_rounded),
+            title: Text('Liste 2'),
+          ),
+          ListTile(
+            leading: Icon(Icons.arrow_forward_ios_rounded),
+            title: Text('Liste 3'),
+          ),
+        ],
+      ),
     );
   }
 }
