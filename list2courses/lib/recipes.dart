@@ -70,7 +70,7 @@ class _addIngrWidget extends State<MyDialog> {
             ListBody(
               children: _ingredientsWidgets,
             ),
-            Text('Ajouter un ingrédient'),
+            Text('Ajouter un ingrédient', style : TextStyle(color: Colors.blueAccent)),
             ElevatedButton(
               child: Icon(Icons.add_box_rounded),
               onPressed: () => setState(
