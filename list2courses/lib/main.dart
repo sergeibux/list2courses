@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:list2courses/shoppingLists.dart';
+import 'package:list2courses/recipes.dart';
+
+import 'fidCards.dart';
 
 void main() {
   runApp(MyApp());
@@ -54,42 +57,25 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                // // Validate returns true if the form is valid, or false otherwise.
-                // if (valueToCheck == valueToCheck.split('').reversed.join()) {
-                //   // If the form is valid, display a snackbar. In the real world,
-                //   // you'd often call a server or save the information in a database.
-                //   ScaffoldMessenger.of(context)
-                //       .showSnackBar(SnackBar(content: Text("C'est oui")));
-                // }else{
-                //   ScaffoldMessenger.of(context)
-                //       .showSnackBar(SnackBar(content: Text("C'est non")));
-                // }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Recipes()),
+                );
               },
               child: Text('Recettes'),
             ),
             ElevatedButton(
               onPressed: () {
-                // // Validate returns true if the form is valid, or false otherwise.
-                // if (valueToCheck == valueToCheck.split('').reversed.join()) {
-                //   // If the form is valid, display a snackbar. In the real world,
-                //   // you'd often call a server or save the information in a database.
-                //   ScaffoldMessenger.of(context)
-                //       .showSnackBar(SnackBar(content: Text("C'est oui")));
-                // }else{
-                //   ScaffoldMessenger.of(context)
-                //       .showSnackBar(SnackBar(content: Text("C'est non")));
-                // }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FidCards()),
+                );
               },
               child: Text('Cartes de fidélité'),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        // onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 

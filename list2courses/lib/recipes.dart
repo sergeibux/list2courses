@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 
-class ShoppingLists extends StatelessWidget {
+class Recipes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Listes de courses"),
+        title: Text("Recettes"),
       ),
       body: ListView(
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.arrow_forward_ios_rounded),
-            title: Text('Liste 1'),
+            leading: Icon(Icons.ac_unit_rounded),
+            title: Text('Recette 1'),
           ),
           ListTile(
-            leading: Icon(Icons.arrow_forward_ios_rounded),
-            title: Text('Liste 2'),
+            leading: Icon(Icons.ac_unit_rounded),
+            title: Text('Recette 2'),
           ),
           ListTile(
-            leading: Icon(Icons.arrow_forward_ios_rounded),
-            title: Text('Liste 3'),
+            leading: Icon(Icons.ac_unit_rounded),
+            title: Text('Recette 3'),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         // onPressed: _incrementCounter,
-        tooltip: 'Nouvelle liste de courses',
+        tooltip: 'Nouvelle recette',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
