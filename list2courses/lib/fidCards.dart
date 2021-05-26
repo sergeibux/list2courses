@@ -3,12 +3,9 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'models/FidCard.dart';
 
-class MainScreen extends StatefulWidget {
-  @override
-  FidCards createState() => FidCards();
-}
 
-class FidCards extends State<MainScreen> {
+
+class FidCards extends StatelessWidget {
 
   static List<FidCard> CARD_LIST = new List<FidCard>();
 
