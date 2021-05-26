@@ -32,11 +32,13 @@ class FidCards extends State<MainScreen> {
     );
   }
 
-  static loadCardList(){
+  static List<ExpansionTile> loadCardList(){
+    List<ExpansionTile> cardExpandTemp = new List<ExpansionTile>();
 
     for(int i =0;i<FidCards.CARD_LIST.length;i++){
       FidCard card = FidCards.CARD_LIST.elementAt(i);
-        cardExpand.add(ExpansionTile(title : Row(children: [Text(card.name)]),
+
+      cardExpandTemp.add(ExpansionTile(title : Row(children: [Text(card.name)]),
             children: [BarcodeWidget(
               barcode: Barcode.code128(),
               data: card.barcodeValue,
@@ -47,6 +49,8 @@ class FidCards extends State<MainScreen> {
         );
 
     }
+
+    return cardExpandTemp;
 
 
 
@@ -64,7 +68,8 @@ class FidCards extends State<MainScreen> {
     if (result != null) {
       setState(() {
         FidCards.CARD_LIST.add(result);
-        FidCards.loadCardList();
+        cardExpand.clear();
+        cardExpand = FidCards.loadCardList();
       });
     }
   }
