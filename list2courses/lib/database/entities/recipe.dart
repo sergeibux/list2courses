@@ -19,8 +19,11 @@ class Recipe {
     return openDatabase(
       join(path, 'list2courses.db'),
       onCreate: (db, version) {
+        db.execute(
+          'CREATE TABLE products(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, quantity INTEGER, unit TEXT)',
+        );
         return db.execute(
-            'CREATE TABLE products(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, quantity INTEGER, unit TEXT); CREATE TABLE recipes(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, fk_product INTEGER)',
+          'CREATE TABLE products(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, quantity INTEGER, unit TEXT); CREATE TABLE recipes(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, fk_product INTEGER)',
         );
       },
       version: 1,
