@@ -4,8 +4,12 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'models/FidCard.dart';
 
 
+class MainScreen extends StatefulWidget{
+  @override
+  FidCards createState() => new FidCards();
+}
 
-class FidCards extends StatelessWidget {
+class FidCards extends State<MainScreen> {
 
   static List<FidCard> CARD_LIST = new List<FidCard>();
 
@@ -17,7 +21,9 @@ class FidCards extends StatelessWidget {
       appBar: AppBar(
         title: Text("Cartes de fidélité"),
       ),
-      body:  ListCardBarcode(),
+      body: ListView(
+          children: cardExpand
+      ),
       floatingActionButton: FloatingActionButton(
          onPressed: () => _addFidCard(context),
         tooltip: 'Nouvelle carte de fidélité',
@@ -30,7 +36,7 @@ class FidCards extends StatelessWidget {
 
     for(int i =0;i<FidCards.CARD_LIST.length;i++){
       FidCard card = FidCards.CARD_LIST.elementAt(i);
-        FidCards.cardExpand.add(ExpansionTile(title : Row(children: [Text(card.name)]),
+        cardExpand.add(ExpansionTile(title : Row(children: [Text(card.name)]),
             children: [BarcodeWidget(
               barcode: Barcode.code128(),
               data: card.barcodeValue,
@@ -48,12 +54,19 @@ class FidCards extends StatelessWidget {
 
   Future<void> _addFidCard(BuildContext context) async {
 
-    return showDialog<void>(
+    var result = await showDialog(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (_) {
           return ScanDialog();
         });
+
+    if (result != null) {
+      setState(() {
+        FidCards.CARD_LIST.add(result);
+        FidCards.loadCardList();
+      });
+    }
   }
 
 
@@ -111,8 +124,6 @@ class _newFidCardDialog extends State<ScanDialog> {
         TextButton(
           child: const Text('Ajouter'),
           onPressed: () => {
-              FidCards.CARD_LIST.add(this.fidcARD),
-              FidCards.loadCardList(),
               Navigator.of(context).pop(fidcARD)
            }
         ),

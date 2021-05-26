@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FidCards()),
+                  MaterialPageRoute(builder: (context) => MainScreen()),
                 );
               },
               child: Text('Cartes de fidélité'),
