@@ -1,6 +1,7 @@
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
+
+import 'db.dart';
 
 class Product {
   int id;
@@ -12,30 +13,16 @@ class Product {
     return {'name': name, 'quantity': quantity, 'unit': unit};
   }
 
-  Future<Database> createProductTable() async {
-    print("-- create product table --");
-    final String path = await getDatabasesPath();
-    print("-- create product table 1 --");
-    return openDatabase(
-      join(path, 'list2courses.db'),
-      onCreate: (db, version) {
-        print("-- create product table 2 --");
-        return db.execute(
-          'CREATE TABLE products(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, quantity INTEGER, unit TEXT)',
-        );
-      },
-      version: 1,
-    );
-  }
-
-  Future<void> insertProduct() async {
+  Future<int> insertProduct() async {
     print("-- insert product --");
-    final table = await createProductTable();
-
-    this.id = await table.insert(
+    Db db = new Db();
+    final tables = await db.updateTables();
+    this.id = await tables.insert(
       'products',
       this.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    print (this.id);
+    return this.id;
   }
 }

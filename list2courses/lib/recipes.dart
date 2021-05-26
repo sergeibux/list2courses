@@ -3,12 +3,19 @@ import 'package:flutter/material.dart';
 import 'database/entities/recipe.dart';
 
 class Recipes extends StatelessWidget {
+  List<Recipe> recipe = new List<Recipe>();
+  List<ListTile> recipeTiles = new List<ListTile>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Recettes"),
       ),
+
+
+      // body: ListView(
+      //   children: recipeTiles,
+      // ),
       body: ListView(
         children: <Widget>[
           ListTile(
@@ -31,6 +38,15 @@ class Recipes extends StatelessWidget {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void fillRecipes(){
+    for (Recipe r in recipe){
+      recipeTiles.add(new ListTile(
+        leading: Icon(Icons.ac_unit_rounded),
+        title: Text(r.name),
+      ));
+    }
   }
 
   Future<void> _newRecipe(BuildContext context) async {
