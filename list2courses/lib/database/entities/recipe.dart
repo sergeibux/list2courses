@@ -4,32 +4,35 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 
 class Recipe {
+  int id;
   String name;
-  Product ingredient;
+  Product ingredient = new Product();
 
   Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'product': ingredient
-    };
+    ingredient.insertProduct();
+    return {'name': name, 'fk_product': ingredient.id};
   }
 
-  final database = openDatabase(
-      join(await getDatabasesPath(), 'list2courses.db'),
-      onCreate : (db, version) {
+  Future<Database> createRecipeTable() async {
+    final String path = await getDatabasesPath();
+    print("path :" + path);
+    return openDatabase(
+      join(path, 'list2courses.db'),
+      onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE recipes(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, fk_prooduct INTEGER)',
+            'CREATE TABLE products(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, quantity INTEGER, unit TEXT); CREATE TABLE recipes(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, fk_product INTEGER)',
         );
       },
-      version : 1,
-  );
+      version: 1,
+    );
+  }
 
-  Future<void> insertRecipe(Recipe recipe) async {
-    final db = await database;
+  Future<void> insertRecipe() async {
+    final table = await createRecipeTable();
 
-    await db.insert(
+    this.id = await table.insert(
       'recipes',
-      recipe.toMap(),
+      this.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }

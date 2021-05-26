@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:list2courses/shoppingLists.dart';
 import 'package:list2courses/recipes.dart';
-
 import 'fidCards.dart';
 
 void main() {

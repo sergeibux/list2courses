@@ -24,7 +24,7 @@ class ShoppingLists extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        // onPressed: _incrementCounter,
+        onPressed: () => _newShoppingList(context),
         tooltip: 'Nouvelle liste de courses',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

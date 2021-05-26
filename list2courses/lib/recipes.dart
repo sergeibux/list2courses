@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'database/entities/recipe.dart';
+
 class Recipes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -55,8 +57,12 @@ class _addIngrWidget extends State<MyDialog> {
   TextField _ingredientsWidgets = new TextField();
   TextField _qttsWidgets = new TextField();
   TextField _unitsWidgets = new TextField();
+  List<String> _ingredients = new List<String>();
+  List<int> _qtts = new List<int>();
+  List<String> _units = new List<String>();
   List<Row> _ingrRows = new List<Row>();
   int _ingredientsCount = 0;
+  Recipe recipe = new Recipe();
   String _recipeName;
 
   Widget build(BuildContext context) {
@@ -113,6 +119,12 @@ class _addIngrWidget extends State<MyDialog> {
         TextButton(
           child: const Text('Ajouter'),
           onPressed: () {
+            print(_recipeName);
+            recipe.name = _recipeName;
+            recipe.ingredient.name = _ingredients[0];
+            recipe.ingredient.quantity = _qtts[0];
+            recipe.ingredient.unit = _units[0];
+            recipe.insertRecipe();
             Navigator.of(context).pop();
           },
         ),
@@ -121,9 +133,9 @@ class _addIngrWidget extends State<MyDialog> {
   }
 
   void _addIngr(BuildContext context) {
-    _qttsWidgets = new TextField(keyboardType: TextInputType.number);
-    _unitsWidgets = new TextField();
-    _ingredientsWidgets = new TextField();
+    _qttsWidgets = new TextField(keyboardType: TextInputType.number, onChanged: (value){_qtts.add(int.parse(value));});
+    _unitsWidgets = new TextField(onChanged: (value){_units.add(value);});
+    _ingredientsWidgets = new TextField(onChanged: (value){_ingredients.add(value);});
     List<SizedBox> l = new List<SizedBox>();
     SizedBox sbQtt =
         new SizedBox.fromSize(child: _qttsWidgets, size: Size(70, 40));
